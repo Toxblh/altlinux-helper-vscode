@@ -1,8 +1,9 @@
 {
   "name": "altlinux-helper",
   "displayName": "Alt Linux Helper",
-  "description": "Extenstion for maintainers easy support packages",
+  "description": "Extension to support Alt Linux maintainers",
   "version": "0.0.1",
+  "publisher": "Toxblh",
   "repository": "https://github.com/Toxblh/altlinux-helper-vscode",
   "engines": {
     "vscode": "^1.84.0"
