@@ -1,0 +1,150 @@
+{
+  "name": "altlinux-helper",
+  "displayName": "Alt Linux Helper",
+  "description": "Extenstion for maintainers easy support packages",
+  "version": "0.0.1",
+  "repository": "https://github.com/Toxblh/altlinux-helper-vscode",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "icon": "assets/logo.png",
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Alt Linux Helper",
+      "properties": {
+        "altlinux-helper.accounts": {
+          "type": "object",
+          "default": {},
+          "description": "Some todo accounts"
+        },
+        "altlinux-helper.interval": {
+          "type": "integer",
+          "default": 300,
+          "description": "Refresh interval(s)"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "altlinux-helper-view",
+          "title": "Alt Linux Helper",
+          "icon": "assets/outline.png"
+        }
+      ]
+    },
+    "views": {
+      "altlinux-helper-view": [
+        {
+          "id": "alt-bugs",
+          "name": "Bugs"
+        },
+        {
+          "id": "alt-tasks",
+          "name": "Tasks"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "altlinux-helper.bugs-refresh",
+          "when": "view == alt-bugs",
+          "group": "navigation"
+        },
+        {
+          "command": "altlinux-helper.tasks-refresh",
+          "when": "view == alt-tasks",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "altlinux-helper.open-link",
+          "when": "view == alt-tasks && viewItem == alt-tasks",
+          "group": "inline"
+        },
+        {
+          "command": "altlinux-helper.bug-open-web",
+          "when": "view == alt-bugs && viewItem == alt-tasks",
+          "group": "inline"
+        },
+        {
+          "command": "altlinux-helper.bug-open-web",
+          "when": "view == alt-bugs && viewItem == bug",
+          "group": "inline"
+        },
+        {
+          "command": "altlinux-helper.task-open-web",
+          "when": "view == alt-tasks && viewItem == task",
+          "group": "inline"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "altlinux-helper.bugs-refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "altlinux-helper.tasks-refresh",
+        "title": "Refresh tasks",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "altlinux-helper.task-open-web",
+        "title": "Open task in web",
+        "icon": "$(ports-open-browser-icon)"
+      },
+      {
+        "command": "altlinux-helper.task-open-inside",
+        "title": "Open task"
+      },
+      {
+        "command": "altlinux-helper.bug-open-web",
+        "title": "Open bug in web",
+        "icon": "$(ports-open-browser-icon)"
+      },
+      {
+        "command": "altlinux-helper.bug-open-inside",
+        "title": "Open bug"
+      },
+      {
+        "command": "altlinux-helper.open-link",
+        "title": "Open link",
+        "icon": "$(globe)"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "install": "vsce package && code --install-extension altlinux-helper-0.0.1.vsix",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.84.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "@vscode/test-electron": "^2.3.6",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.1"
+  }
+}
